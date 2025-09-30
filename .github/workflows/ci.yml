@@ -59,7 +59,7 @@ jobs:
 
       # 8.3 Scanner l'image Docker
       - name: Scan Docker image with Trivy
-        run: trivy image --exit-code 1 --severity CRITICAL,HIGH devsecure-api
+        run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --exit-code 1 --severity CRITICAL,HIGH devsecure-api
 
       # 9. Nettoyer
       - name: Stop and remove container
