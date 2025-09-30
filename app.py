@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
 # @app.route('/')
 # def hello():
-#     return "Hello from Flask!"
+#     return "Hello from Flaskd!"
 
 # @app.route('/ping')
 # def ping():
