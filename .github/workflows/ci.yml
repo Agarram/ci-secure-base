@@ -48,6 +48,17 @@ jobs:
       - name: Test app response
         run: curl --fail http://localhost:3000/ | grep "Hello from Flask!"
 
+      # 8.1 Installer Trivy
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+
+      # 8.2 Scanner l'image Docker
+      - name: Scan Docker image with Trivy
+        run: |
+          ./trivy image devsecure-api
+          ./trivy image --exit-code 1 --severity CRITICAL,HIGH devsecure-api
+
       # 9. Nettoyer
       - name: Stop and remove container
         if: always()
