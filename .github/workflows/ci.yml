@@ -53,11 +53,13 @@ jobs:
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
 
-      # 8.2 Scanner l'image Docker
+      # 8.2 Vérifier les résultats du scan
+      - name: Check Trivy version
+        run: trivy --version
+
+      # 8.3 Scanner l'image Docker
       - name: Scan Docker image with Trivy
-        run: |
-          trivy image devsecure-api
-          trivy image --exit-code 1 --severity CRITICAL,HIGH devsecure-api
+        run: trivy image --exit-code 1 --severity CRITICAL,HIGH devsecure-api
 
       # 9. Nettoyer
       - name: Stop and remove container
